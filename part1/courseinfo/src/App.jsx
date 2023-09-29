@@ -27,10 +27,13 @@ const Content = (props) => {
 }
 
 const Total = (props) => {
+  let sum = 0
+  props.parts.forEach(part => sum += part.exercise)
+
   return (
     <>
       <p>
-        Number of exercises {props.num}
+        Number of exercises {sum}
       </p>
     </>
   )
@@ -38,24 +41,26 @@ const Total = (props) => {
 
 const App = () => {
   const course = 'Half Stack application development'
-  const part1 = {
-    name: 'Fundamentals of React',
-    exercise: 10
-  }
-  const part2 = {
-    name: 'Using props to pass data',
-    exercise: 7
-  }
-  const part3 = {
-    name: 'State of a componet',
-    exercise: 14
-  }
+  const parts = [
+    {
+      name: 'Fundamentals of React',
+      exercise: 10
+    },
+    {
+      name: 'Using props to pass data',
+      exercise: 7
+    },
+    {
+      name: 'State of a componet',
+      exercise: 14
+    }
+  ]
 
   return (
     <>
       <Header course={course} />
-      <Content parts={[part1, part2, part3]} />
-      <Total num={part1.exercise + part2.exercise + part3.exercise} />
+      <Content parts={parts} />
+      <Total parts={parts} />
     </>
   )
 }
