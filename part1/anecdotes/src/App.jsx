@@ -1,12 +1,13 @@
 import { useState } from 'react'
 
 const Ancedote = (props) => {
-  const {anecdotes, index} = props
+  const {anecdotes, points, index} = props
   
   return(
     <div>
-      {anecdotes[index]}
-    </div>
+      <p>{anecdotes[index]}</p>
+      <p>has {points[index]} votes</p>
+      </div>
   )
 }
 
@@ -36,11 +37,20 @@ const App = () => {
     return Math.floor((Math.random() * anecdotes.length))
   }
 
+  const incPoint = (index) => {
+    const copy = [...points]
+    copy[index]++
+
+    return () => setPoints(copy)
+  }
+
   const [rand, setRand] = useState(genRand())
+  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0))
 
   return (
     <div>
-      <Ancedote anecdotes={anecdotes} index={rand} />
+      <Ancedote anecdotes={anecdotes} points={points} index={rand} />
+      <Button text="vote" handler={incPoint(rand)} />
       <Button text="next anecdote" handler={() => setRand(genRand())} />
     </div>
   )
