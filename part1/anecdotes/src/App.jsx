@@ -5,9 +5,9 @@ const Ancedote = (props) => {
   
   return(
     <div>
-      <p>{anecdotes[index]}</p>
-      <p>has {points[index]} votes</p>
-      </div>
+      <div>{anecdotes[index]}</div>
+      <div>has {points[index]} votes</div>
+    </div>
   )
 }
 
@@ -18,6 +18,26 @@ const Button = (props) => {
     <button onClick={handler}>
       {text}
     </button>
+  )
+}
+
+const MostVote = (props) => {
+  const {anecdotes, points} = props
+  let index = 0
+  let max = points[0]
+
+  for(let i = 1; i < anecdotes.length; i++) {
+    if(points[i] > max) {
+      index = i
+      max = points[i]
+    }
+  }
+
+  return(
+    <div>
+      <div>{anecdotes[index]}</div>
+      <div>has {points[index]} votes</div>
+    </div>
   )
 }
 
@@ -49,9 +69,13 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <Ancedote anecdotes={anecdotes} points={points} index={rand} />
       <Button text="vote" handler={incPoint(rand)} />
       <Button text="next anecdote" handler={() => setRand(genRand())} />
+
+      <h1>Anecdote with most votes</h1>
+      <MostVote anecdotes={anecdotes} points={points} />
     </div>
   )
 }
