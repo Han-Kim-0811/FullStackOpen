@@ -27,14 +27,27 @@ const Percentage = (props) => {
 }
 
 const Statistics = (props) => {
-  const {all, average, positive} = props
-  return (
-    <div>
-      <Display text={'all'} val={all} />
-      <Display text={'average'} val={average} />
-      <Percentage text={'positive'} val={positive} />
-    </div>
-  )
+  const {gCount, nCount, bCount, all, average, positive} = props
+
+  if(all === 0) {
+    return (
+      <div>
+        No feedback given
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <Display text={'good'} val={gCount} />
+        <Display text={'neutral'} val={nCount} />
+        <Display text={'bad'} val={bCount} />
+        <Display text={'all'} val={all} />
+        <Display text={'average'} val={average} />
+        <Percentage text={'positive'} val={positive} />
+      </div>
+    )
+  }
+
 }
 
 const App = () => {
@@ -56,10 +69,7 @@ const App = () => {
       <Button handler={incCount(bCount, setB)} text='bad' />
       
       <h1>statistics</h1>
-      <Display text={'good'} val={gCount} />
-      <Display text={'neutral'} val={nCount} />
-      <Display text={'bad'} val={bCount} />
-      <Statistics all={all} average={average} positive={positive} />
+      <Statistics gCount={gCount} nCount={nCount} bCount={bCount} all={all} average={average} positive={positive} />
     </div>
   )
 }
