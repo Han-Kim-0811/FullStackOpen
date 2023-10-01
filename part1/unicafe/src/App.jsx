@@ -14,11 +14,17 @@ const Statisticsline = (props) => {
   const {text, val} = props
   if(text !== 'positive') {
     return (
-      <div>{text} {val}</div>
+      <tr>
+        <td>{text}</td>
+        <td>{val}</td>
+      </tr>
     )
   } else {
     return (
-      <div>{text} {val * 100} %</div>
+      <tr>
+        <td>{text}</td>
+        <td>{val * 100} %</td>
+      </tr>
     )
   }
 }
@@ -34,14 +40,16 @@ const Statistics = (props) => {
     )
   } else {
     return (
-      <div>
-        <Statisticsline text="good" val={gCount} />
-        <Statisticsline text="neutral" val={nCount} />
-        <Statisticsline text="bad" val={bCount} />
-        <Statisticsline text="all" val={all} />
-        <Statisticsline text="average" val={average} />
-        <Statisticsline text="positive" val={positive} />
-      </div>
+      <table>
+        <tbody>
+          <Statisticsline text="good" val={gCount} />
+          <Statisticsline text="neutral" val={nCount} />
+          <Statisticsline text="bad" val={bCount} />
+          <Statisticsline text="all" val={all} />
+          <Statisticsline text="average" val={average} />
+          <Statisticsline text="positive" val={positive} />
+        </tbody>
+      </table>
     )
   }
 
