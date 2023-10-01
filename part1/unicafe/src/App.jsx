@@ -18,12 +18,24 @@ const Display = (props) => {
   )
 }
 
+const Percentage = (props) => {
+  const {text, val} = props
+
+  return (
+    <div>{text} {val * 100} %</div>
+  )
+}
+
 const App = () => {
   const [gCount, setG] = useState(0)
   const [nCount, setN] = useState(0)
   const [bCount, setB] = useState(0)
 
   const incCount = (count, setCount) => () => setCount(count + 1)
+ 
+  const all = gCount + nCount + bCount
+  const average = (gCount - bCount) / all
+  const positive = gCount / all
 
   return (
     <div>
@@ -36,6 +48,9 @@ const App = () => {
       <Display text={'good'} val={gCount} />
       <Display text={'neutral'} val={nCount} />
       <Display text={'bad'} val={bCount} />
+      <Display text={'all'} val={all} />
+      <Display text={'average'} val={average} />
+      <Percentage text={'positive'} val={positive} />
     </div>
   )
 }
