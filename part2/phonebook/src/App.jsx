@@ -9,11 +9,17 @@ const App = () => {
   const buttonHandler = (event) => {
     event.preventDefault()
 
-    const toConcat = {
-      name: newName
-    }
+    const keys = persons.map(person => person.name)
 
-    setPersons(persons.concat(toConcat))
+    if(keys.includes(newName)) {
+      alert(`${newName} is already added to phonebook`)
+    } else {
+      const toConcat = {
+        name: newName
+      }
+  
+      setPersons(persons.concat(toConcat))
+    }
   }
 
   const changeHandler = (event) => {
