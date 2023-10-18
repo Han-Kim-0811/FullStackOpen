@@ -43,6 +43,14 @@ const App = () => {
     }
   }
 
+  const delHandler = (id) => {
+    const ids = persons.map(person => person.id)
+    const index = ids.indexOf(id)
+    const newPersons = persons.slice()
+    newPersons.splice(index, 1)
+    setPersons(newPersons)
+  }
+
   const changeNameHandler = (event) => {
     setNewName(event.target.value)
   }
@@ -70,7 +78,7 @@ const App = () => {
       <Persons 
         array={persons}
         text={search}
-        refresh={hook}
+        setter={delHandler}
       />
     </div>
   )

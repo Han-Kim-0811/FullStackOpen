@@ -1,15 +1,15 @@
 import personsService from '../services/persons'
 
-const eventHandler = (id, name, refresh) => {
+const eventHandler = (id, name, setter) => {
     if(window.confirm(`Delete ${name}?`)) {
         personsService.delPerson(id)
-        refresh();
+        setter(id);
     }
 }
 
-const DelButton = ( {id, name, refresh} ) => {
+const DelButton = ( {id, name, setter} ) => {
     return (
-        <button onClick={() => eventHandler(id, name, refresh)}>
+        <button onClick={() => eventHandler(id, name, setter)}>
             Delete
         </button>
     )

@@ -1,6 +1,6 @@
 import DelButton from './DelButton'
 
-const Persons = ({ array, text, refresh }) => {
+const Persons = ({ array, text, setter }) => {
     const personsToShow = text === '' 
             ? array 
             : array.filter(person => person.name.includes(text)) 
@@ -12,7 +12,7 @@ const Persons = ({ array, text, refresh }) => {
                 <DelButton 
                     id={person.id}
                     name={person.name}
-                    refresh={refresh}
+                    setter={setter}
                 />
             </div>
         )
