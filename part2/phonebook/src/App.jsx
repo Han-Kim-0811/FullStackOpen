@@ -35,8 +35,11 @@ const App = () => {
         name: newName,
         number: newNumber
       }
-  
-      setPersons(persons.concat(toConcat))
+
+      const promise = axios.post('http://localhost:3001/persons', toConcat)
+      const eventHandler = response => setPersons(persons.concat(response.data))
+    
+      promise.then(eventHandler)
     }
   }
 
