@@ -1,6 +1,6 @@
 const PersonForm = (props) => {
     return (
-        <form>
+        <form onSubmit={props.clickHandler}>
             <div>
                 name: <input 
                 value={props.name} 
@@ -12,7 +12,7 @@ const PersonForm = (props) => {
                 onChange={props.numberHandler}/>
             </div>
             <div>
-                <button type="submit" onClick={props.clickHandler}>add</button>
+                <button type="submit">add</button>
             </div>
         </form>
     )
