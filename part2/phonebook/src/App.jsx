@@ -29,7 +29,22 @@ const App = () => {
     const keys = persons.map(person => person.name)
 
     if(keys.includes(newName)) {
-      alert(`${newName} is already added to phonebook`)
+      const question = `${newName} is already added to phonebook, replace the old number with a new one?`
+      if(window.confirm(question)) {
+        const id = persons.find(p => p.name === newName).id
+        
+        const newPerson = {
+          name: newName,
+          number: newNumber,
+          id: id
+        }
+        personsService.updatePerson(id, newPerson)
+
+        const newPersons = persons.slice()
+        const index = keys.indexOf(newName)
+        newPersons.splice(index, 1, newPerson)
+        setPersons(newPersons)
+      }
     } else {
       const toConcat = {
         name: newName,

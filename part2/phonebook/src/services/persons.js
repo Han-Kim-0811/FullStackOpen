@@ -12,7 +12,11 @@ const createPerson = (personObj) => {
 }
 
 const delPerson = (id) => {
-    return axios.delete(`${url}/${id}`)
+    axios.delete(`${url}/${id}`)
 }
 
-export default { getPersons, createPerson, delPerson}
+const updatePerson = (id, personObj) => {
+    return axios.put(`${url}/${id}`, personObj).then(getData)
+}
+
+export default { getPersons, createPerson, delPerson, updatePerson}
