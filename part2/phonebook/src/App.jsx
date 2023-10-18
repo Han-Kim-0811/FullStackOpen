@@ -13,7 +13,7 @@ const App = () => {
   const hook = () => {
     const promise = personsService.getPersons()
     const eventHandler = response => setPersons(response)
-
+    
     promise.then(eventHandler)
   }
 
@@ -23,7 +23,7 @@ const App = () => {
     setSearch(event.target.value)
   }
 
-  const buttonHandler = (event) => {
+  const addHandler = (event) => {
     event.preventDefault()
 
     const keys = persons.map(person => person.name)
@@ -54,13 +54,24 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter text={search} handler={searchHandler} />
+      <Filter 
+        text={search}
+        handler={searchHandler}
+      />
       <h2>add a new</h2>
-      <PersonForm name={newName} nameHandler={changeNameHandler}
-      number={newNumber} numberHandler={changeNumberHandler} 
-      clickHandler={buttonHandler}/>
+      <PersonForm 
+        name={newName}
+        nameHandler={changeNameHandler}
+        number={newNumber}
+        numberHandler={changeNumberHandler} 
+        clickHandler={addHandler}
+      />
       <h2>Numbers</h2>
-      <Persons array={persons} text={search}/>
+      <Persons 
+        array={persons}
+        text={search}
+        refresh={hook}
+      />
     </div>
   )
 }

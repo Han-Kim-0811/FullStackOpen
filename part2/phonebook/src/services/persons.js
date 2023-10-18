@@ -11,4 +11,8 @@ const createPerson = (personObj) => {
     return axios.post(url, personObj).then(getData)
 }
 
-export default { getPersons, createPerson }
+const delPerson = (id) => {
+    return axios.delete(`${url}/${id}`)
+}
+
+export default { getPersons, createPerson, delPerson}
