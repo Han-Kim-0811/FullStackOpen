@@ -12,7 +12,7 @@ const createPerson = (personObj) => {
 }
 
 const delPerson = (id) => {
-    axios.delete(`${url}/${id}`)
+    return axios.delete(`${url}/${id}`)
 }
 
 const updatePerson = (id, personObj) => {

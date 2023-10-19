@@ -11,6 +11,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [notification, setNotification] = useState(null)
+  const [styleColor, setStyleColor] = useState('green')
 
   const hook = () => {
     const promise = personsService.getPersons()
@@ -60,7 +61,8 @@ const App = () => {
       const eventHandler = response => setPersons(persons.concat(response))
     
       promise.then(eventHandler)
-
+      
+      setStyleColor('green')
       setNotification(`Added ${newName}`)
       setTimeout(() => setNotification(null), 5000)
     }
@@ -69,14 +71,25 @@ const App = () => {
     setNewNumber('')
   }
 
-  const delHandler = (id) => {
+  const delHandler = (name, id) => {
     const ids = persons.map(person => person.id)
     const index = ids.indexOf(id)
-    const name = persons[index].name
     const newPersons = persons.slice()
     newPersons.splice(index, 1)
     setPersons(newPersons)
-    setNotification(`Deleted ${name}`)
+    setStyleColor('green')
+    setNotification(`Removed ${name}`)
+    setTimeout(() => setNotification(null), 5000)
+  }
+
+  const delErrHandler = (name, id) => {
+    const ids = persons.map(person => person.id)
+    const index = ids.indexOf(id)
+    const newPersons = persons.slice()
+    newPersons.splice(index, 1)
+    setPersons(newPersons)
+    setStyleColor('red')
+    setNotification(`Information of ${name} has already been removed from server`)
     setTimeout(() => setNotification(null), 5000)
   }
 
@@ -91,7 +104,9 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={notification}/>
+      <Notification 
+      message={notification}
+      styleColor={styleColor}/>
       <Filter 
         text={search}
         handler={searchHandler}
@@ -109,6 +124,7 @@ const App = () => {
         array={persons}
         text={search}
         setter={delHandler}
+        errMsg={delErrHandler}
       />
     </div>
   )
