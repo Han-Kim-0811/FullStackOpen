@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Person'
+import Notification from './components/Notification'
 import personsService from './services/persons'
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
   const [search, setSearch] = useState('')
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [notification, setNotification] = useState(null)
 
   const hook = () => {
     const promise = personsService.getPersons()
@@ -44,6 +46,9 @@ const App = () => {
         const index = keys.indexOf(newName)
         newPersons.splice(index, 1, newPerson)
         setPersons(newPersons)
+
+        setNotification(`Edited ${newName}'s number`)
+        setTimeout(() => setNotification(null), 5000)
       }
     } else {
       const toConcat = {
@@ -55,15 +60,24 @@ const App = () => {
       const eventHandler = response => setPersons(persons.concat(response))
     
       promise.then(eventHandler)
+
+      setNotification(`Added ${newName}`)
+      setTimeout(() => setNotification(null), 5000)
     }
+
+    setNewName('')
+    setNewNumber('')
   }
 
   const delHandler = (id) => {
     const ids = persons.map(person => person.id)
     const index = ids.indexOf(id)
+    const name = persons[index].name
     const newPersons = persons.slice()
     newPersons.splice(index, 1)
     setPersons(newPersons)
+    setNotification(`Deleted ${name}`)
+    setTimeout(() => setNotification(null), 5000)
   }
 
   const changeNameHandler = (event) => {
@@ -77,6 +91,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification}/>
       <Filter 
         text={search}
         handler={searchHandler}
