@@ -1,5 +1,7 @@
 import { useState } from "react"
+import CapitalWeather from "./CapitalWeather"
 import countriesService from "../services/countries"
+
 
 const DetailedInfo = ({name}) => {
   const [country, setCountry] = useState(null)
@@ -30,6 +32,8 @@ const DetailedInfo = ({name}) => {
         src={country.flags.png}
         alt={country.flags.alt}
       />
+
+      <CapitalWeather capital={country.capital} countryCode={country.cca2}/>
     </div>
   )
 }
