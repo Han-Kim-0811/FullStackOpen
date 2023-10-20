@@ -1,4 +1,5 @@
 import DetailedInfo from "./DetailedInfo"
+import CountryList from "./CountryList"
 
 const CountryInfo = ({countries, toFind}) => {
   if(toFind === '') {
@@ -14,7 +15,7 @@ const CountryInfo = ({countries, toFind}) => {
   } else if(toShow.length == 0) {
     return <div>No matches found</div>
   } else{
-    return toShow.map(country => <div key={country}>{country}</div>)
+    return <CountryList countries={toShow}/>
   }
 }
 

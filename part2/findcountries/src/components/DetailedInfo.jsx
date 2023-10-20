@@ -4,9 +4,12 @@ import countriesService from "../services/countries"
 const DetailedInfo = ({name}) => {
   const [country, setCountry] = useState(null)
 
+  if(name === null) {
+    return <div></div>
+  }
+
   if(country === null || country.name.common != name) {
     countriesService.getOne(name).then(response => {
-      console.log(response)
       setCountry(response)
     })
 
@@ -20,7 +23,7 @@ const DetailedInfo = ({name}) => {
       <div>area {country.area}</div>
 
       <h3>languages:</h3>
-      {Object.values(country.languages).map(lang => <li>{lang}</li>)}
+      {Object.values(country.languages).map(lang => <li key={lang}>{lang}</li>)}
 
       
       <img style={{paddingTop: 20, width: 200}}
